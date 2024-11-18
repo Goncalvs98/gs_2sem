@@ -41,7 +41,7 @@ src/
    npm start
    ```
 
-Por padrão, o frontend estará disponível em `http://localhost:3001`.
+Por padrão, o frontend estará disponível em `http://localhost:8081`.
 
 ## Configuração da API
 

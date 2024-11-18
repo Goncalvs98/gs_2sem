@@ -6,6 +6,12 @@ const api = axios.create({
   baseURL: 'http://localhost:3000/api/stations', // Ajuste para o URL do backend
 });
 
+// Busca da estação
+export const fetchStationById = async (id: string) => {
+  const response = await axios.get(`/${id}`);
+  return response.data;
+};
+
 // Lista todas as estações
 export const fetchStations = async (): Promise<Station[]> => {
   const response = await api.get('/');
