@@ -8,7 +8,7 @@ const api = axios.create({
 
 // Busca da estação
 export const fetchStationById = async (id: string) => {
-  const response = await axios.get(`/${id}`);
+  const response = await api.get(`/${id}`);
   return response.data;
 };
 
