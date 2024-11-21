@@ -1,5 +1,6 @@
 // src/components/StationCard.tsx
 import React from 'react';
+import { Card, CardContent, Typography, Button } from '@mui/material';
 import { Station } from '../types/Station';
 
 interface Props {
@@ -9,13 +10,21 @@ interface Props {
 
 const StationCard: React.FC<Props> = ({ station, onDelete }) => {
   return (
-    <div className="station-card">
-      <h3>{station.location}</h3>
-      <p>Status: {station.status}</p>
-      <p>Capacidade: {station.capacity}</p>
-      <p>Disponível: {station.available}</p>
-      <button onClick={() => onDelete(station.id)}>Deletar</button>
-    </div>
+    <Card variant="outlined" style={{ marginBottom: '1rem' }}>
+      <CardContent>
+        <Typography variant="h5">{station.location}</Typography>
+        <Typography>Status: {station.status}</Typography>
+        <Typography>Capacidade: {station.capacity}</Typography>
+        <Typography>Disponível: {station.available}</Typography>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={() => onDelete(station.id)}
+        >
+          Deletar
+        </Button>
+      </CardContent>
+    </Card>
   );
 };
 

@@ -1,3 +1,4 @@
+// backend/controllers/stationController.js
 const Station = require('../models/Station');
 
 exports.getStationById = async (req, res) => {
@@ -66,6 +67,25 @@ exports.deleteStation =  async (req, res) => {
     const { id } = req.params;
     await Station.destroy({ where: { id } });
     res.json({ message: 'Estação deletada com sucesso' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.updateStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const station = await Station.findByPk(id);
+    if (!station) {
+      return res.status(404).json({ error: 'Estação não encontrada' });
+    }
+
+    station.status = status;
+    await station.save();
+
+    res.json({ message: 'Status atualizado com sucesso', station });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
