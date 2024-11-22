@@ -24,9 +24,21 @@ const HomePage: React.FC = () => {
     }, []);
 
     const handleDelete = async (id: string) => {
-        await deleteStation(id);
-        setStations(stations.filter((station) => station.id !== id));
+        const confirmDelete = window.confirm('Tem certeza que deseja excluir esta estação?');
+        if (!confirmDelete) {
+            return; // Se o usuário cancelar, a função termina aqui
+        }
+    
+        try {
+            await deleteStation(id); // Chama a API para excluir o registro
+            setStations(stations.filter((station) => station.id !== id)); // Atualiza a lista de estações
+            alert('Estação excluída com sucesso!'); // Exibe mensagem de sucesso
+        } catch (error) {
+            console.error('Erro ao excluir estação:', error);
+            alert('Erro ao excluir a estação. Tente novamente.'); // Mensagem de erro
+        }
     };
+    
 
     if (loading) {
         return <p>Carregando estações...</p>;
