@@ -16,6 +16,11 @@ export const fetchStations = async (): Promise<Station[]> => {
   return response.data;
 };
 
+export const fetchStationById = async (id: string): Promise<Station> => {
+  const response = await api.get(`/stations/${id}`);
+  return response.data;
+};
+
 export const addStation = async (station: Omit<Station, 'id'>): Promise<Station> => {
   const response = await api.post('/stations/', station);
   return response.data;
@@ -33,9 +38,9 @@ export const deleteStation = async (id: string): Promise<void> => {
 export const setAuthToken = (token: string) => {
   if (token) {
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    localStorage.setItem('authToken', token); // Salva o token
+    localStorage.setItem('token', token); // Salva o token
   } else {
     delete api.defaults.headers.common['Authorization'];
-    localStorage.removeItem('authToken'); // Remove o token
+    localStorage.removeItem('token'); // Remove o token
   }
 };

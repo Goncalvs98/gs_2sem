@@ -12,13 +12,15 @@ const LoginPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { token } = await login(username, password);
-      setAuthToken(token);
-      navigate('/');
+        const { token } = await login(username, password);
+        setAuthToken(token);
+        console.log('Redirecionando para a Home...');
+        navigate('/'); // Tenta redirecionar
     } catch (err) {
-      setError('Usuário ou senha inválidos');
+        setError('Usuário ou senha inválidos');
     }
-  };
+};
+
 
   return (
     <div>
