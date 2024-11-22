@@ -1,4 +1,4 @@
-// backend/controllers/stationController.js
+// backend/src/controllers/stationController.js
 const Station = require('../models/Station');
 
 exports.getStationById = async (req, res) => {

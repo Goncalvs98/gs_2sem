@@ -1,3 +1,4 @@
+// frontend/src/pages/HomePage.tsx
 import React, { useEffect, useState } from 'react';
 import { fetchStations, deleteStation } from '../services/api';
 import { Station } from '../types/Station';
@@ -10,9 +11,14 @@ const HomePage: React.FC = () => {
 
     useEffect(() => {
         const loadStations = async () => {
-            const data = await fetchStations();
-            setStations(data);
-            setLoading(false);
+            try {
+                const data = await fetchStations();
+                setStations(data);
+              } catch (err) {
+                console.error('Erro ao carregar estações:', err);
+              } finally {
+                setLoading(false);
+              }
         };
         loadStations();
     }, []);
